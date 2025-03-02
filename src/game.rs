@@ -19,7 +19,7 @@ impl Game {
         let sdl_context = sdl2::init().unwrap();
         let event_pump = sdl_context.event_pump().unwrap();
         let video_subsystem = sdl_context.video().unwrap();
-        let window = video_subsystem.window("Hello SDL", Self::WINDOW_WIDTH, Self::WINDOW_HEIGHT)
+        let window = video_subsystem.window("Ellipse Simulator", Self::WINDOW_WIDTH, Self::WINDOW_HEIGHT)
             .position_centered()
             .build()
             .unwrap();
