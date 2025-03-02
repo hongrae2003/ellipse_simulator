@@ -75,6 +75,8 @@ impl Game {
     fn update(&mut self) {
         let dt = self.tick();
         // println!("{}", 1.0 / dt);
+
+        self.ball.update(dt);
     }
 
     fn output(&mut self) {
