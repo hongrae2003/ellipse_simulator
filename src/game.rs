@@ -1,5 +1,8 @@
+mod ball;
+
 use std::{cmp::min, thread::sleep, time::{Duration, Instant}};
 
+use ball::{draw_ball, Ball};
 use sdl2::{event::Event, keyboard::Keycode, pixels::Color, render::Canvas, video::Window, EventPump};
 
 use crate::math::{ellipse::{draw_ellipse, mark_focus, Ellipse}, vec2::Vec2};
@@ -10,6 +13,7 @@ pub struct Game {
     clock: Instant,
     running: bool,
     ellipse: Ellipse,
+    ball: Ball
 }
 
 impl Game {
@@ -30,7 +34,8 @@ impl Game {
         let clock = Instant::now();
         let running = true;
         let ellipse = Ellipse::new(Vec2 {x: Self::WINDOW_WIDTH as f32 / 2.0, y: Self::WINDOW_HEIGHT as f32 / 2.0}, 200.0, 150.0);
-        Game { event_pump, canvas, clock, running, ellipse }
+        let ball = Ball::new(ellipse.focus().0);
+        Game { event_pump, canvas, clock, running, ellipse, ball }
     }
     
     pub fn run(&mut self) {
@@ -78,6 +83,7 @@ impl Game {
 
         draw_ellipse(&mut self.canvas, &self.ellipse);
         mark_focus(&mut self.canvas, &self.ellipse);
+        draw_ball(&mut self.canvas, &self.ball);
 
         self.canvas.present();
     }
