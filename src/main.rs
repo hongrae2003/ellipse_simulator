@@ -1,4 +1,5 @@
 mod game;
+mod math;
 
 use game::Game;
 

@@ -2,11 +2,14 @@ use std::{cmp::min, thread::sleep, time::{Duration, Instant}};
 
 use sdl2::{event::Event, keyboard::Keycode, pixels::Color, render::Canvas, video::Window, EventPump};
 
+use crate::math::{ellipse::{draw_ellipse, Ellipse}, vec2::Vec2};
+
 pub struct Game {
     event_pump: EventPump,
     canvas: Canvas<Window>,
     clock: Instant,
     running: bool,
+    ellipse: Ellipse,
 }
 
 impl Game {
@@ -26,7 +29,8 @@ impl Game {
         let canvas = window.into_canvas().build().unwrap();
         let clock = Instant::now();
         let running = true;
-        Game { event_pump, canvas, clock, running }
+        let ellipse = Ellipse::new(Vec2 {x: Self::WINDOW_WIDTH as f32 / 2.0, y: Self::WINDOW_HEIGHT as f32 / 2.0}, 200.0, 150.0);
+        Game { event_pump, canvas, clock, running, ellipse }
     }
     
     pub fn run(&mut self) {
@@ -71,6 +75,9 @@ impl Game {
     fn output(&mut self) {
         self.canvas.set_draw_color(Color::WHITE);
         self.canvas.clear();
+
+        draw_ellipse(&mut self.canvas, &self.ellipse);
+
         self.canvas.present();
     }
 }

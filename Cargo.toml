@@ -6,10 +6,10 @@ edition = "2024"
 [dependencies.sdl2]
 version = "0.37"
 default-features = false
-features = ["static-link","use-vcpkg"]
+features = ["gfx", "static-link","use-vcpkg"]
 
 [package.metadata.vcpkg]
-dependencies = ["sdl2"]
+dependencies = ["sdl2", "sdl2-gfx"]
 git = "https://github.com/microsoft/vcpkg"
 rev = "2025.02.14" 
 
