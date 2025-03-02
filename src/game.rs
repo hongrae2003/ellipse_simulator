@@ -2,7 +2,7 @@ use std::{cmp::min, thread::sleep, time::{Duration, Instant}};
 
 use sdl2::{event::Event, keyboard::Keycode, pixels::Color, render::Canvas, video::Window, EventPump};
 
-use crate::math::{ellipse::{draw_ellipse, Ellipse}, vec2::Vec2};
+use crate::math::{ellipse::{draw_ellipse, mark_focus, Ellipse}, vec2::Vec2};
 
 pub struct Game {
     event_pump: EventPump,
@@ -77,6 +77,7 @@ impl Game {
         self.canvas.clear();
 
         draw_ellipse(&mut self.canvas, &self.ellipse);
+        mark_focus(&mut self.canvas, &self.ellipse);
 
         self.canvas.present();
     }
